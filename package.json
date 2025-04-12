@@ -1,0 +1,59 @@
+{
+    "name": "jikan-api-lightweight-client",
+    "version": "1.0.0.0",
+    "description": "Lightweight Jikan API client. Exports only minimal Fetch call. Fully compatible with AWS LLRT.",
+    "keywords": [
+        "anime",
+        "api",
+        "async",
+        "fetch",
+        "jikan.moe",
+        "jikan",
+        "lightweight",
+        "llrt",
+        "MAL",
+        "manga",
+        "myanimelist-api",
+        "myanimelist",
+        "MyAnimeList",
+        "no-deps",
+        "rest-api",
+        "rest"
+    ],
+    "scripts": {
+        "generate-client": "tsx ./src/generator.mts",
+        "format": "prettier --write --ignore-path '' ./output/*.ts",
+        "lint": "eslint .",
+        "test": "jest",
+        "start": "npm run generate-client && npm run format && npm run lint"
+    },
+    "type": "module",
+    "declaration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "engines": {
+        "node": ">=0.12"
+    },
+    "devDependencies": {
+        "@hey-api/openapi-ts": "^0.47.1",
+        "@types/eslint": "^9.6.1",
+        "@types/jest": "^29.5.14",
+        "@typescript-eslint/eslint-plugin": "^8.14.0",
+        "@typescript-eslint/parser": "^8.14.0",
+        "eslint": "^9.15.0",
+        "generate-license-file": "^3.6.0",
+        "prettier": "3.3.3",
+        "tsx": "^4.19.2",
+        "typescript": "^5.6.3"
+    },
+    "author": "HRAshton",
+    "license": "MIT",
+    "homepage": "https://github.com/HRAshton/jikan-api-lightweight-client",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/HRAshton/jikan-api-lightweight-client.git"
+    },
+    "bugs": {
+        "url": "https://github.com/HRAshton/jikan-api-lightweight-client/issues"
+    }
+}
