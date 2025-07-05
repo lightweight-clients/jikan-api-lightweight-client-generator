@@ -1,0 +1,5 @@
+﻿{
+  "specification_url": "https://raw.githubusercontent.com/lightweight-clients/schemas/refs/heads/master/schemas/jikan-api/openapi.json",
+  "temp_folder": "./.tmp",
+  "output_folder": "./output"
+}

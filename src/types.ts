@@ -1,17 +1,17 @@
 ﻿export interface EndpointData {
-    get: {
-        operationId: string;
-        parameters?: [];
-        responses: {
-            '200': {
-                description: string;
-            };
-        };
+  get: {
+    operationId: string;
+    parameters?: [];
+    responses: {
+      [statusCode: string]: {
+        description: string;
+      };
     };
+  };
 }
 
-export interface OpenApi {
-    paths: {
-        [path: string]: EndpointData;
-    };
-}
+export type OpenApi = Record<string, unknown> & {
+  paths: {
+    [path: string]: EndpointData;
+  };
+};
