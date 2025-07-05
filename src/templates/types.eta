@@ -1,0 +1,13 @@
+﻿// noinspection JSUnusedGlobalSymbols
+
+import type * as types from './raw-types';
+<% it.endpoints.forEach((type) => { %>
+
+// Types for /<%= type.name %>
+
+<% if (type.hasQueryParameters) { %>
+export type <%= type.baseEndpointName %>Data = types.<%= type.baseEndpointName %>Data['body'];
+<% } %>
+export type <%= type.baseEndpointName %>Response = types.<%= type.baseEndpointName %>Responses[keyof types.<%= type.baseEndpointName %>Responses];
+export type <%= type.baseEndpointName %>OkResponse = types.<%= type.baseEndpointName %>Responses['200'];
+<% }) %>

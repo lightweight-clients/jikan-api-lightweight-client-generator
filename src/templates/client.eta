@@ -6,7 +6,7 @@
  * Configure the client via 'core.ts'.
  */
 
-import type * as simpleTypes from './simple-types';
+import type * as types from './types';
 import { client_fetch } from './core';
 
 <% it.endpoints.forEach(endpoint => { %>
@@ -15,27 +15,29 @@ import { client_fetch } from './core';
  * <%= endpoint.description %>
 
  */
-<% if (endpoint.hasParameters) { %>
 export const <%= endpoint.name %> = async (
-  args: simpleTypes.<%= endpoint.baseEndpointName %>Data
-): Promise<
-  | simpleTypes.<%= endpoint.baseEndpointName %>OkResponse
-  | simpleTypes.<%= endpoint.baseEndpointName %>Response
-> => {
-  return await client_fetch<
-    simpleTypes.<%= endpoint.baseEndpointName %>Data,
-    simpleTypes.<%= endpoint.baseEndpointName %>Response
-  >(`<%= endpoint.url %>`, args);
-};
-<% } else { %>
-export const <%= endpoint.name %> = async (): Promise<
-  | simpleTypes.<%= endpoint.baseEndpointName %>OkResponse
-  | simpleTypes.<%= endpoint.baseEndpointName %>Response
-> => {
-  return await client_fetch<
-    never,
-    simpleTypes.<%= endpoint.baseEndpointName %>Response
-  >(`<%= endpoint.url %>`);
-};
-<% } %>
+  <% endpoint.pathParameters.forEach(param => { %>
+    <%= param.name %>: <%= param.schema.type.replace('integer', 'number') %>,
+  <% }) %>
+  <% if (endpoint.hasQueryParameters) { %>
+    args: types.<%= endpoint.baseEndpointName %>Data,
+  <% } %>
+  ): Promise<
+    | types.<%= endpoint.baseEndpointName %>OkResponse
+    | types.<%= endpoint.baseEndpointName %>Response
+  > => {
+    return await client_fetch<
+      <% if (endpoint.hasQueryParameters) { %>
+        types.<%= endpoint.baseEndpointName %>Data,
+      <% } else { %>
+        never,
+      <% } %>
+      types.<%= endpoint.baseEndpointName %>Response
+    >(
+      `<%= endpoint.url.replaceAll('{', '${') %>`,
+      <% if (endpoint.hasQueryParameters) { %>
+       args,
+      <% } %>
+    );
+  };
 <% }) %>
