@@ -1,0 +1,11 @@
+﻿// noinspection JSUnusedGlobalSymbols
+
+import type * as types from './types';
+<% it.endpoints.forEach((type) => { %>
+
+// Types for /<%= type.name %>
+
+export type <%= type.baseEndpointName %>Data = types.Post<%= type.baseEndpointName %>Data['body'];
+export type <%= type.baseEndpointName %>Response = types.Post<%= type.baseEndpointName %>Response;
+export type <%= type.baseEndpointName %>OkResponse = types.Post<%= type.baseEndpointName %>Responses['200'];
+<% }) %>
